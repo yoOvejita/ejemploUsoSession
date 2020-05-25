@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+@using ASPNET04.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Carrito</title>
+</head>
+<body>
+    <h3>Carrito</h3>
+    <table>
+        <tr>
+            <td>Opción</td>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Foto</td>
+            <td>Cantidad</td>
+            <td>Subtotal</td>
+        </tr>
+        @foreach (Item item in (List<Item>)Session["carrito"])
+        {
+            <td><a href="@Url.Action("Borrar", "Carrito", new { id = item.Producto.Id})">Borrar</a></td>
+            <tr>
+                <td>@(item.Producto.Precio * item.Cantidad)</td>
+            </tr>        }
+        <tr>
+            <td>TOTAL:</td>
+            <td>
+                @{ 
+                    List<Item> carro = (List<Item>)Session["carrito"];
+                    var tot = carro.Sum(x => x.Producto.Precio * x.Cantidad);
+                }
+                @tot
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

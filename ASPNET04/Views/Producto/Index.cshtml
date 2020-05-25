@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+@using ASPNET04.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h3>LISTA DE PRODUCTOS</h3>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Foto</td>
+            <td>COMPRAR</td>
+        </tr>
+        @foreach (Producto prod in ViewBag.productos) {
+            <tr>
+                <td>@prod.Id</td>
+                <td>@prod.Nombre</td>
+                <td>@prod.Precio</td>
+                <td>@prod.Foto</td>
+                <td>
+                    <a href="@Url.Action("Compra", "Carrito", new { id = prod.Id})"></a>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
